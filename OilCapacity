@@ -1,0 +1,50 @@
+"""
+You have an oil tank with a capacity of C litres that
+can be bought and sold by N people. The people
+are standing in a queue are served sequentially in
+the order of array A.
+Some of them want to sell a litre of oil and some of
+them want to buy a litre of oil and A describes this.
+Here, A[i] = 1 denotes that the person wants to sell
+a litre of oil and A[i] = -1 denotes that the person
+wants to buy a litre of oil.
+When a person wants to sell a litre of oil but the
+tank is full, they cannot sell it and become upset.
+Similarly, when a person wants to buy a litre of
+oil but the tank is empty, they cannot buy it and
+become upset. Both these cases cause disturbances.
+You can minimize the disturbance by filling the tank
+initially with a certain X litres of oil.
+Find the minimum initial amount of oil X that results
+in the least number of disturbances
+"""
+
+
+
+# Read number of elements
+n = int(input())
+
+c = int(input())
+# Read the n elements
+a = []
+for _ in range(n):
+    a.append(int(input()))
+
+leastangry = n
+bestcapacity = 0
+
+for i in range(c + 1):
+    currcap = i
+    angry = 0
+    for j in range(n):
+        if (a[j] == 1 and currcap == c) or (a[j] == -1 and currcap == 0):
+            angry += 1
+        else:
+            currcap = currcap + a[j]
+        
+ 
+    if leastangry > angry:
+        leastangry = angry
+        bestcapacity = i
+
+print(bestcapacity)
