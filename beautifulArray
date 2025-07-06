@@ -1,0 +1,47 @@
+"""
+Problem Statement: Define a Beautiful Function F(x) as follows: Add 1 to the value of x, and if the result contains any trailing zeros, remove them all.
+
+Examples:
+
+F(11) = 12
+
+F(99) = 1(100 –> 10 –> 1)
+
+F(29) = 3(30 –> 3)
+
+Let us define a number that can be reached from x if we can apply the Beautiful Function to x a certain number of times (possibly zero) and get that number as a result.
+
+Example: 3 can be deduced from the number 29953, as F(29953) -> F(2996) -> 3. 
+
+You are given a number N. Your task is to determine how many numbers can be deduced from N.
+
+Input Format: 
+
+The first line contains an integer N, which represents the given number.
+"""
+def beautiful(n):
+    n += 1
+    
+    while n % 10 == 0:
+        n //= 10
+    return n
+    
+
+
+
+n = int(input())
+
+a = beautiful(n)
+arr = []
+arr.append(n)
+
+stop = False
+count = 0
+while stop == False:
+    n = beautiful(n)
+    if n in arr:
+        break
+    else:
+        arr.append(n)
+    
+print(len(arr))
