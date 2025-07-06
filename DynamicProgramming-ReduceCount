@@ -1,0 +1,38 @@
+"""
+General Ali has devised a strategic game to reduce
+an enemy army of N soldiers to just 1 soldier using a
+minimal number of moves.
+The game allows the following three types of
+moves:
+1. Reduce the enemy army by 1 soldier.
+2. Reduce the enemy army by half of its current
+soldiers, rounding down to the nearest integer.
+3. Reduce the enemy army by two-thirds of its
+current soldiers, rounding down to the nearest
+integer.
+Each move must ensure that the resulting number
+of soldiers is an integer.
+Find the minimum number of moves required to
+reduce enemy army to just 1 soldier
+"""
+
+def min_moves_to_one(n):
+    dp = [0] * (n + 1)  # dp[i] = min moves to reduce i to 1
+
+    for i in range(2, n + 1):
+        # Option 1: Reduce by 1
+        dp[i] = dp[i - 1] + 1
+
+        # Option 2: Reduce by half
+        half = i - (i // 2)
+        dp[i] = min(dp[i], dp[half] + 1)
+
+        # Option 3: Reduce by two-thirds
+        two_third = i - ((2 * i) // 3)
+        dp[i] = min(dp[i], dp[two_third] + 1)
+
+    return dp[n]
+
+# Example usage
+n = int(input("Enter number of soldiers: "))
+print("Minimum moves to reduce to 1 soldier:", min_moves_to_one(n))
