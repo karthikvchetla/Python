@@ -1,0 +1,38 @@
+"""
+You are given an array A of length N and an
+integer k.
+It is given that a subarray from l to r is considered
+good, if the number of distinct elements in that
+subarray doesn’t exceed k. Additionally, an empty
+subarray is also a good subarray and its sum is
+considered to be zero.
+Find the maximum sum of a good subarray.
+"""
+
+
+# Read number of elements
+n = int(input())
+
+k = int(input())
+# Read the n elements
+a = []
+for _ in range(n):
+    a.append(int(input()))
+
+sumgood = 0
+
+for i in range(n):
+    for j in range(i, n + 1, 1):
+        # Find the Unique Numbers from array starting from i to object
+        subarray = a[i:j]
+        unique = len(list(set(subarray)))
+        if unique <= k:
+            if sumgood < sum(subarray):
+                sumgood = sum(subarray)
+        else:
+            break
+print(sumgood)
+
+
+
+
